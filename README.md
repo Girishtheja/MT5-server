@@ -8,6 +8,7 @@ This project is a RESTful API server that allows users to manage MT5 trading acc
 
 -  User authentication (register and login)
 -  Create and manage MT5 trading accounts
+-  Retrive all accounts created by the user
 -  Execute trades on MT5 accounts
 -  Retrieve trade history
 -  Retrieve account positions
@@ -75,7 +76,13 @@ Create an MT5 account:
 curl -X POST http://localhost:3000/api/mt5/accounts \
 -H "Authorization: Bearer your_jwt_token" \
 -H "Content-Type: application/json" \
--d '{"login": "123456", "password": "mt5pass", "name": "Test Account", "server": "MetaQuotes-Demo"}'
+-d '{
+    "login": "login",
+    "password": "password",
+    "name": "MT5",
+    "server": "Exness-MT5Real18",
+    "magic": 1234567
+}'
 
 ```
 Execute a trade:
@@ -83,10 +90,26 @@ Execute a trade:
 curl -X POST http://localhost:3000/api/mt5/accounts/your_account_id/trade \
 -H "Authorization: Bearer your_jwt_token" \
 -H "Content-Type: application/json" \
--d '{"symbol": "EURUSD", "volume": 0.1, "actionType": "ORDER_TYPE_BUY"}'
+-d '{
+    "symbol": "EURUSDm",
+    "actionType": "ORDER_TYPE_BUY",
+    "volume": 0.01,
+    "comment": "Buy via curl",
+    "magic": 123456
+}'
 
 ```
+Get all accounts
+```bash
+curl -X POST http://localhost:3000/api/mt5/accounts \
+-H "Authorization: Bearer your_jwt_token" \
+```
+Get position of the trade:
+```bash
+curl -X GET http://localhost:3000/api/mt5/accounts/your_account_id/positions \
+-H "Authorization: Bearer your_jwt_token"
 
+```
 Get all trades:
 ```bash
 curl -X GET http://localhost:3000/api/trades \
