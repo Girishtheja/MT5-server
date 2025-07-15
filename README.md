@@ -20,4 +20,43 @@ This project is a RESTful API server that allows users to manage MT5 trading acc
 - MongoDB (local or cloud instance)
 - MetaApi account and API token
 
+---
+
+##  Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/Girishtheja/MT5-server.git
+cd MT5-server
+```
+
+2. Installation
+
+```bash
+npm install
+```
+3. Create .env file in the root directory 
+```bash
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret_key
+METAAPI_TOKEN=your_metaapi_token
+
+```
+4. Start the server
+```bash
+node index.js
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 
