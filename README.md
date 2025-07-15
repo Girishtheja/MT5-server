@@ -47,16 +47,49 @@ METAAPI_TOKEN=your_metaapi_token
 node index.js
 ```
 
+---
 
+## Testing Endpoints
 
+**Note:** Import as curl in Postman to test the end points.
 
+Register a new user:
 
+```bash
+curl -X POST http://localhost:3000/api/auth/register \
+-H "Content-Type: application/json" \
+-d '{"username": "testuser", "password": "testpass"}'
 
+```
+Login
+```bash
+curl -X POST http://localhost:3000/api/auth/login \
+-H "Content-Type: application/json" \
+-d '{"username": "testuser", "password": "testpass"}'
 
+```
+**Note:** Use the token received in the login response as your Bearer Authorization header for all protected endpoints below.
 
+Create an MT5 account:
+```bash
+curl -X POST http://localhost:3000/api/mt5/accounts \
+-H "Authorization: Bearer your_jwt_token" \
+-H "Content-Type: application/json" \
+-d '{"login": "123456", "password": "mt5pass", "name": "Test Account", "server": "MetaQuotes-Demo"}'
 
+```
+Execute a trade:
+```bash
+curl -X POST http://localhost:3000/api/mt5/accounts/your_account_id/trade \
+-H "Authorization: Bearer your_jwt_token" \
+-H "Content-Type: application/json" \
+-d '{"symbol": "EURUSD", "volume": 0.1, "actionType": "ORDER_TYPE_BUY"}'
 
+```
 
+Get all trades:
+```bash
+curl -X GET http://localhost:3000/api/trades \
+-H "Authorization: Bearer your_jwt_token"
 
-
-
+```
